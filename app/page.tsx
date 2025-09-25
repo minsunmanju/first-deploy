@@ -12,31 +12,54 @@ async function getResumeInfo() {
   return res.json();
 }
 
+async function getResumeProjectInfo() {
+  const res = await fetch(
+    "https://raw.githubusercontent.com/minsunmanju/first-deploy/refs/heads/main/service/resume_portfolio_service.json"
+  );
+  // API 응답이 성공적인지 확인
+  if (!res.ok) {
+    // 응답이 실패하면 오류를 던져 Next.js가 오류 페이지를 보여주도록 함
+    throw new Error("Failed to fetch data");
+  }
+  return res.json();
+}
+
 export default async function Home() {
-  const data = await getResumeInfo();
+  const data1 = await getResumeInfo();
+  const data2 = await getResumeProjectInfo();
   return (
     <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
       <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
+        <img
+          src="https://i.pinimg.com/474x/a9/01/fe/a901fe11aeb11c960fa1b41ec4b0abeb.jpg"
+          alt="샘플 이미지"
+          width={200}
+          height={200}
         />
+
         <ol className="font-mono list-inside list-decimal text-sm/6 text-center sm:text-left">
           <li className="mb-2 tracking-[-.01em]">
             안녕하세요{" "}
             <code className="bg-black/[.05] dark:bg-white/[.06] font-mono font-semibold px-1 py-0.5 rounded">
-              {data.name} 입니다
+              {data1.name} 입니다
             </code>
             .
           </li>
           <li className="tracking-[-.01em]">화이팅 합시다.</li>
         </ol>
-
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
+        <ol className="font-mono list-inside list-decimal text-sm/6 text-center sm:text-left">
+          <li className="mb-2 tracking-[-.01em]">
+            팀 프로젝트의 이름은{" "}
+            <code className="bg-black/[.05] dark:bg-white/[.06] font-mono font-semibold px-1 py-0.5 rounded">
+              {data2.project} 입니다
+            </code>
+            .
+          </li>
+          <li className="tracking-[-.01em]">
+            WeFit 프로젝트는 더욱 즐거운 운동생활을 돕습니다.
+          </li>
+        </ol>
+        {/* <div className="flex gap-4 items-center flex-col sm:flex-row">
           <a
             className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
             href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
@@ -60,9 +83,9 @@ export default async function Home() {
           >
             Read our docs
           </a>
-        </div>
+        </div> */}
       </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
+      {/* <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
         <a
           className="flex items-center gap-2 hover:underline hover:underline-offset-4"
           href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
@@ -108,7 +131,7 @@ export default async function Home() {
           />
           Go to nextjs.org →
         </a>
-      </footer>
+      </footer> */}
     </div>
   );
 }
