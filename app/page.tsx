@@ -1,137 +1,110 @@
-import Image from "next/image";
-// 서버 컴포넌트에서 직접 API 호출
-async function getResumeInfo() {
-  const res = await fetch(
-    "https://raw.githubusercontent.com/minsunmanju/first-deploy/refs/heads/main/service/resume_general_info_service.json"
-  );
-  // API 응답이 성공적인지 확인
-  if (!res.ok) {
-    // 응답이 실패하면 오류를 던져 Next.js가 오류 페이지를 보여주도록 함
-    throw new Error("Failed to fetch data");
-  }
-  return res.json();
-}
+import { Mail, Phone, MapPin, Github, Code } from "lucide-react";
+import { SiHtml5, SiCss3, SiJavascript, SiReact } from "react-icons/si";
 
-async function getResumeProjectInfo() {
-  const res = await fetch(
-    "https://raw.githubusercontent.com/minsunmanju/first-deploy/refs/heads/main/service/resume_portfolio_service.json"
-  );
-  // API 응답이 성공적인지 확인
-  if (!res.ok) {
-    // 응답이 실패하면 오류를 던져 Next.js가 오류 페이지를 보여주도록 함
-    throw new Error("Failed to fetch data");
-  }
-  return res.json();
-}
-
-export default async function Home() {
-  const data1 = await getResumeInfo();
-  const data2 = await getResumeProjectInfo();
+export default function Page() {
   return (
-    <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <img
-          src="https://i.pinimg.com/474x/a9/01/fe/a901fe11aeb11c960fa1b41ec4b0abeb.jpg"
-          alt="샘플 이미지"
-          width={200}
-          height={200}
-        />
+    <main className="min-h-screen bg-gradient-to-b from-sky-50 to-white text-gray-800 p-8">
+      {/* Header */}
+      <section className="text-center mb-16">
+        <h1 className="text-5xl font-extrabold mb-4 text-sky-600">김민선</h1>
+        <p className="text-xl text-gray-600">끝없이 성장하는 개발자</p>
+      </section>
 
-        <ol className="font-mono list-inside list-decimal text-sm/6 text-center sm:text-left">
-          <li className="mb-2 tracking-[-.01em]">
-            안녕하세요{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] font-mono font-semibold px-1 py-0.5 rounded">
-              {data1.name} 입니다
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">화이팅 합시다.</li>
-        </ol>
-        <ol className="font-mono list-inside list-decimal text-sm/6 text-center sm:text-left">
-          <li className="mb-2 tracking-[-.01em]">
-            팀 프로젝트의 이름은{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] font-mono font-semibold px-1 py-0.5 rounded">
-              {data2.project} 입니다
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            WeFit 프로젝트는 더욱 즐거운 운동생활을 돕습니다.
-          </li>
-        </ol>
-        {/* <div className="flex gap-4 items-center flex-col sm:flex-row">
+      {/* Contact Info */}
+      <section className="flex flex-wrap justify-center gap-8 mb-16 max-w-5xl mx-auto">
+        <div className="flex items-center space-x-3 text-sky-600 hover:text-sky-800 transition">
+          <Phone className="w-6 h-6" /> <span>010-3027-1608</span>
+        </div>
+        <div className="flex items-center space-x-3 text-sky-600 hover:text-sky-800 transition">
+          <Mail className="w-6 h-6" /> <span>pretty5320@naver.com</span>
+        </div>
+        <div className="flex items-center space-x-3 text-sky-600 hover:text-sky-800 transition">
+          <MapPin className="w-6 h-6" /> <span>서울특별시 노원구</span>
+        </div>
+        <div className="flex items-center space-x-3 text-sky-600 hover:text-sky-800 transition">
+          <Github className="w-6 h-6" />
           <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
+            href="https://github.com/minsunmanju"
             target="_blank"
             rel="noopener noreferrer"
+            className="hover:underline"
           >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
+            github.com/minsunmanju
           </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
-        </div> */}
-      </main>
-      {/* <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer> */}
-    </div>
+        </div>
+      </section>
+
+      {/* Skills */}
+      <section className="max-w-5xl mx-auto mb-16">
+        <h2 className="text-3xl font-semibold mb-8 flex items-center text-sky-600">
+          <Code className="w-7 h-7 mr-2" /> 기술 스택
+        </h2>
+        <div className="flex justify-center flex-wrap gap-10">
+          <div className="flex flex-col items-center text-center hover:scale-110 transform transition">
+            <SiHtml5 className="w-16 h-16 text-orange-500 mb-2" />
+            <span className="font-medium text-gray-700">HTML</span>
+          </div>
+          <div className="flex flex-col items-center text-center hover:scale-110 transform transition">
+            <SiCss3 className="w-16 h-16 text-blue-500 mb-2" />
+            <span className="font-medium text-gray-700">CSS</span>
+          </div>
+          <div className="flex flex-col items-center text-center hover:scale-110 transform transition">
+            <SiJavascript className="w-16 h-16 text-yellow-500 mb-2" />
+            <span className="font-medium text-gray-700">JavaScript</span>
+          </div>
+          <div className="flex flex-col items-center text-center hover:scale-110 transform transition">
+            <SiReact className="w-16 h-16 text-sky-400 mb-2" />
+            <span className="font-medium text-gray-700">React</span>
+          </div>
+        </div>
+      </section>
+
+      {/* Projects */}
+      <section className="max-w-5xl mx-auto mb-16">
+        <h2 className="text-3xl font-semibold mb-10 text-sky-600 text-center">
+          프로젝트 경험
+        </h2>
+        <div className="space-y-12">
+          <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-6">
+            <div className="flex-1">
+              <h3 className="text-2xl font-bold mb-2 text-sky-600">
+                Game Forge
+              </h3>
+              <p className="text-gray-600 leading-relaxed">
+                사용자 맞춤형 추천 알고리즘을 활용한 게임 쇼핑몰 웹 서비스.
+                개인의 취향을 기반으로 맞춤형 게임을 추천하고, 구매까지 이어질
+                수 있는 경험을 제공했습니다.
+              </p>
+            </div>
+            <div className="flex-1 text-center md:text-right">
+              <span className="inline-block px-4 py-2 bg-sky-100 text-sky-600 rounded-full font-medium">
+                웹 프로젝트
+              </span>
+            </div>
+          </div>
+
+          <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-6">
+            <div className="flex-1">
+              <h3 className="text-2xl font-bold mb-2 text-sky-600">WeFit</h3>
+              <p className="text-gray-600 leading-relaxed">
+                LG CNS AM CAMP 3기에서 진행한 헬스장 게임화 커뮤니티 서비스.
+                운동 기록과 포인트 시스템을 통해 동기부여를 강화하고, 사용자 간
+                커뮤니케이션을 활성화했습니다.
+              </p>
+            </div>
+            <div className="flex-1 text-center md:text-right">
+              <span className="inline-block px-4 py-2 bg-sky-100 text-sky-600 rounded-full font-medium">
+                부트캠프 프로젝트
+              </span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Footer */}
+      <footer className="text-center text-gray-500 text-sm mt-16 border-t border-sky-100 pt-6">
+        © 2025 김민선. All rights reserved.
+      </footer>
+    </main>
   );
 }
